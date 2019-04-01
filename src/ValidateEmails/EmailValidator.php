@@ -1,5 +1,5 @@
 <?php
-namespace ValidateEmails;
+namespace OleksiiNikishkin\ValidateEmails;
 
 
 use OleksiiNikishkin\ValidateEmails\Exceptions\EmailValidateException;
