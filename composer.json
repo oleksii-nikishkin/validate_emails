@@ -1,0 +1,10 @@
+{
+    "name": "oleksii-nikishkin/validate-emails",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Oleksii Nikishkin",
+            "email": "aleks.nikishin.mk@gmail.com"
+        }
+    ]
+}
