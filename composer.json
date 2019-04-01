@@ -11,6 +11,9 @@
     "autoload": {
         "psr-4": {
             "OleksiiNikishkin\\ValidateEmails\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     }
 }

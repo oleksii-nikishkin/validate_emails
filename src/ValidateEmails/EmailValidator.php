@@ -1,18 +1,21 @@
 <?php
 namespace OleksiiNikishkin\ValidateEmails;
 
-
-use OleksiiNikishkin\ValidateEmails\Exceptions\EmailValidateException;
-
 class EmailValidator {
     private $_domainPattern = '[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?';
     private $_namePattern = '[A-Za-z0-9._%+-]+';
     private $_emailPattern;
-    private $_emailErrors = [];
     private $_blacklistedNames = [];
     private $_blacklistedDomains = [];
     private $_emails = [];
 
+    /**
+     * EmailValidator constructor.
+     *
+     * @param array $emails
+     * @param array $blacklistedNames
+     * @param array $blacklistedDomains
+     */
     public function __construct(array $emails, array $blacklistedNames = [], array $blacklistedDomains = []) {
         $this->_emails = $emails;
         $this->_blacklistedNames = $blacklistedNames;
@@ -21,6 +24,14 @@ class EmailValidator {
         $this->_emailPattern = "/^" . $this->_namePattern . "@" . $this->_domainPattern . "$/";
     }
 
+
+    /**
+     * Validate domains.
+     *
+     * Returns true if validation is passed, otherwise returns an array of incorrect domains
+     *
+     * @return array|bool
+     */
     public function validateDomains() {
         $invalidDomains = [];
 
@@ -34,6 +45,13 @@ class EmailValidator {
         return true;
     }
 
+    /**
+     * Validate names.
+     *
+     * Returns true if validation is passed, otherwise returns an array of incorrect names
+     *
+     * @return array|bool
+     */
     public function validateNames() {
         $invalidNames = [];
 
@@ -47,6 +65,12 @@ class EmailValidator {
         return true;
     }
 
+
+    /**
+     * Returns an array with separated emails to valid and non-valid
+     *
+     * @return array
+     */
     public function validateEmails() {
         $validEmails = $invalidEmails = [];
 
@@ -60,10 +84,10 @@ class EmailValidator {
 
             list($name, $domain) = explode('@', $email);
 
-            if (!empty($blacklistedNames) && self::inArrayCI($name, $blacklistedNames))
+            if (!empty($blacklistedNames) && in_array_ci($name, $blacklistedNames))
                 $emailErrors[] = "the local part of the email address is blacklisted";
 
-            if (!empty($blacklistedDomains) && self::inArrayCI($domain, $blacklistedDomains))
+            if (!empty($blacklistedDomains) && in_array_ci($domain, $blacklistedDomains))
                 $emailErrors[] = "the domain of the email address is blacklisted";
 
             if (preg_match('/(.)\1{2}/', $email))
