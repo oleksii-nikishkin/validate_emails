@@ -8,9 +8,6 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "php": ">=5.4"
-    },
     "autoload": {
         "psr-4": {
             "OleksiiNikishkin\\ValidateEmails\\": "src"
