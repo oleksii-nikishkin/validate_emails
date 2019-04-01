@@ -2,7 +2,7 @@
 namespace ValidateEmails;
 
 
-use ValidateEmails\Exceptions\EmailValidateException;
+use OleksiiNikishkin\ValidateEmails\Exceptions\EmailValidateException;
 
 class EmailValidator {
     private $_domainPattern = '[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?';

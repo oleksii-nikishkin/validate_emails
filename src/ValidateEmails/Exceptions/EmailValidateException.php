@@ -1,6 +1,6 @@
 <?php
 
-namespace ValidateEmails\Exceptions;
+namespace OleksiiNikishkin\ValidateEmails\Exceptions;
 
 class EmailValidateException extends \Exception {
     private $_options;
