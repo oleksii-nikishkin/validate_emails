@@ -2,7 +2,7 @@
 namespace OleksiiNikishkin\ValidateEmails;
 
 class EmailValidator {
-    private $_domainPattern = '[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?';
+    private $_domainPattern = '[A-Za-z0-9]+([\-\.]{1}[A-Za-z0-9]+)*\.[A-Za-z]{2,5}(:[0-9]{1,5})?(\/.*)?';
     private $_namePattern = '[A-Za-z0-9._%+-]+';
     private $_emailPattern;
     private $_blacklistedNames = [];
@@ -84,10 +84,10 @@ class EmailValidator {
 
             list($name, $domain) = explode('@', $email);
 
-            if (!empty($blacklistedNames) && in_array_ci($name, $blacklistedNames))
+            if (!empty($this->_blacklistedNames) && in_array_ci($name, $this->_blacklistedNames))
                 $emailErrors[] = "the local part of the email address is blacklisted";
 
-            if (!empty($blacklistedDomains) && in_array_ci($domain, $blacklistedDomains))
+            if (!empty($this->_blacklistedDomains) && in_array_ci($domain, $this->_blacklistedDomains))
                 $emailErrors[] = "the domain of the email address is blacklisted";
 
             if (preg_match('/(.)\1{2}/', $email))
