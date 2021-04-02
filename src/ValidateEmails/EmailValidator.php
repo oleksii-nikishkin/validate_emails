@@ -1,22 +1,18 @@
-<?php
+<?php declare(strict_types = 1);
+
 namespace OleksiiNikishkin\ValidateEmails;
 
-class EmailValidator {
-    private $_domainPattern = '[A-Za-z0-9]+([\-\.]{1}[A-Za-z0-9]+)*\.[A-Za-z]{2,5}(:[0-9]{1,5})?(\/.*)?';
-    private $_namePattern = '[A-Za-z0-9._%+-]+';
-    private $_emailPattern;
-    private $_blacklistedNames = [];
-    private $_blacklistedDomains = [];
-    private $_emails = [];
+class EmailValidator
+{
+    private string $_domainPattern = '[A-Za-z0-9]+([\-\.]{1}[A-Za-z0-9]+)*\.[A-Za-z]{2,5}(:[0-9]{1,5})?(\/.*)?';
+    private string $_namePattern = '[A-Za-z0-9._%+-]+';
+    private string $_emailPattern;
+    private array $_blacklistedNames = [];
+    private array $_blacklistedDomains = [];
+    private array $_emails = [];
 
-    /**
-     * EmailValidator constructor.
-     *
-     * @param array $emails
-     * @param array $blacklistedNames
-     * @param array $blacklistedDomains
-     */
-    public function __construct(array $emails, array $blacklistedNames = [], array $blacklistedDomains = []) {
+    public function __construct(array $emails, array $blacklistedNames = [], array $blacklistedDomains = [])
+    {
         $this->_emails = $emails;
         $this->_blacklistedNames = $blacklistedNames;
         $this->_blacklistedDomains = $blacklistedDomains;
@@ -25,53 +21,46 @@ class EmailValidator {
     }
 
 
-    /**
+    /*
      * Validate domains.
      *
      * Returns true if validation is passed, otherwise returns an array of incorrect domains
-     *
-     * @return array|bool
      */
-    public function validateDomains() {
+    public function validateDomains(): array
+    {
         $invalidDomains = [];
 
         foreach ($this->_blacklistedDomains as $key => $domain) {
             if (!preg_match("/^" . $this->_domainPattern . "$/", $domain))
                 $invalidDomains[] = $domain;
         }
-        if (count($invalidDomains))
-            return $invalidDomains;
 
-        return true;
+        return $invalidDomains;
     }
 
-    /**
+    /*
      * Validate names.
      *
      * Returns true if validation is passed, otherwise returns an array of incorrect names
-     *
-     * @return array|bool
      */
-    public function validateNames() {
+    public function validateNames(): array
+    {
         $invalidNames = [];
 
         foreach ($this->_blacklistedNames as $key => $name) {
             if (!preg_match("/^" . $this->_namePattern . "$/", $name))
                 $invalidNames[] = $name;
         }
-        if (count($invalidNames))
-            return $invalidNames;
 
-        return true;
+        return $invalidNames;
     }
 
 
-    /**
+    /*
      * Returns an array with separated emails to valid and non-valid
-     *
-     * @return array
      */
-    public function validateEmails() {
+    public function validateEmails(): array
+    {
         $validEmails = $invalidEmails = [];
 
         foreach ($this->_emails as $email) {

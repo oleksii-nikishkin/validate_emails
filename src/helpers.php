@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
-/**
+/*
  * Case-insensitive in_array() implementation.
- *
- * @param $needle
- * @param $haystack
- * @return bool
  */
-function in_array_ci($needle, $haystack) {
+function in_array_ci(string $needle, array $haystack): bool
+{
     return in_array(strtolower($needle), array_map('strtolower', $haystack));
 }
