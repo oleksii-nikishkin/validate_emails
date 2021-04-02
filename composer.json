@@ -1,6 +1,7 @@
 {
     "name": "oleksii-nikishkin/validate-emails",
     "type": "library",
+    "description": "A tool for email validation.",
     "authors": [
         {
             "name": "Oleksii Nikishkin",
@@ -10,10 +11,13 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "OleksiiNikishkin\\ValidateEmails\\": "src"
+            "OleksiiNikishkin\\": "src"
         },
         "files": [
             "src/helpers.php"
         ]
+    },
+    "require": {
+        "php": ">=7.4"
     }
 }
